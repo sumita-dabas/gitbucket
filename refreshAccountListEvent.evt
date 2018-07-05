@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Fired when a an Account is created/edited/deleted.">
+    <aura:attribute name="accounts" type="Account[]" description="The result of the search"/>
+</aura:event>

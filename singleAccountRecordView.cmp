@@ -1,0 +1,30 @@
+<aura:component access="global" controller="accountDetailController">
+    <aura:attribute name="account" type="Account"/>
+    <aura:attribute name="updateAcc" type="Account"/>
+    <aura:attribute name="accountList" type="Account[]"/>
+    <aura:attribute name="editMode" type="Boolean" default="false"/>
+    <aura:registerEvent name="accountUpdate" type="c:refreshAccountListEvent"/>
+    <td>
+        <div class="slds-grid">
+            <aura:if isTrue="{!!v.editMode}">    
+                <button class="slds-button slds-button--brand" onclick="{!c.EditAcc}" id="{!v.account.Id}">Edit</button>                       
+                <button class="slds-button slds-button--brand" onclick="{!c.deleteAcc}" id="{!v.account.Id}">Delete</button>
+                <aura:set attribute="else">
+                    <button class="slds-button slds-button--brand" onclick="{!c.saveAcc}" id="{!v.account.Id}">Save</button>                       
+                    <button class="slds-button slds-button--brand" onclick="{!c.Cancel}">Cancel</button>    
+                </aura:set></aura:if>
+            </div></td>
+        
+        <aura:if isTrue="{!!v.editMode}">    
+            <td ><label class="slds-label">{!v.account.Name}</label></td>
+            <td ><label class="slds-label">{!v.account.AccountNumber}</label></td>
+            <td ><label class="slds-label">{!v.account.Phone}</label></td>
+            <td ><label class="slds-label">{!v.account.Website}</label></td>
+            <aura:set attribute="else">
+                <td ><lightning:input class="columnClass1" value="{!v.updateAcc.Name}" type="Text"/></td>
+                <td ><lightning:input class="columnClass1" value="{!v.updateAcc.AccountNumber}" type="Number"/></td>
+                <td ><lightning:input class="columnClass1" value="{!v.updateAcc.Phone}" type="Number"/></td>
+                <td ><lightning:input class="columnClass1" value="{!v.updateAcc.Website}" type="Text"/></td>
+            </aura:set>
+        </aura:if>
+    </aura:component>

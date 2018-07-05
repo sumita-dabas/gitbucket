@@ -1,0 +1,19 @@
+<aura:component  access="global" controller="accountDetailController">
+    <aura:attribute name="newAcc" type="Account" default="{ 'Name': '','AccountNumber' :'','Email__c' :''}"/>
+    <aura:attribute name="accountList" type="Account[]"/>
+    <aura:registerEvent name="newAccountCreated" type="c:refreshAccountListEvent"/>
+    
+    <div  class="slds-align_absolute-center " >
+        <lightning:card title="New Account" class=" slds-size--1-of-4 slds-form-element__control slds-m-top_medium">
+            <form aura:id='newAccForm' class="slds-form-element__control slds-m-left_medium slds-m-right_medium">
+                <lightning:input label="Account Name" type="text" value="{!v.newAcc.Name}"/>
+                <lightning:input label="Account Number" type="text" value="{!v.newAcc.AccountNumber}"/>
+                <lightning:input label="Account Phone" type="tel" value="{!v.newAcc.Phone}"/>
+                <lightning:input label="Account Website" type="text" value="{!v.newAcc.Website}"/><br/><br/>
+                <lightning:layout horizontalalign="center" class="slds-align_absolute-center">
+                	<lightning:button class="slds-button slds-button--brand" label="Create Account" onclick="{!c.createAccount1}" />
+                </lightning:layout>
+            </form>
+        </lightning:card>
+    </div>    
+</aura:component>

@@ -1,0 +1,49 @@
+<aura:component controller="accountDetailController" >
+    <!--Account attributes-->
+    <aura:attribute name="accountList" type="Account[]" />
+    <aura:attribute name="accountList1" type="Account[]" />
+    <aura:attribute name="delAcc" type="Account"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:handler event="c:refreshAccountListEvent" action="{!c.handleAccountEvent}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- Pagination attributes-->
+    <aura:attribute name="PaginationList" type="Account"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    
+    <div class="slds-align_absolute-center">
+        <lightning:card title="Account Details" class=" slds-size--3-of-4  slds-m-right_small slds-m-left_small slds-m-top_small" >
+            <table class="slds-scrollable  slds-col--padded slds-m-left_small">
+                <thead>
+                    <tr class="slds-col--padded">
+                        <td class="columnClass"><label class="slds-label">Action</label></td>
+                        <td class="columnClass"><label class="slds-label">Account Name</label></td>
+                        <td class="columnClass"><label class="slds-label">Account Number</label></td>
+                        <td class="columnClass"><label class="slds-label">Phone</label></td>
+                        <td class="columnClass"><label class="slds-label">Website</label></td>
+                    </tr>
+                </thead> 
+                <tbody >
+                    <aura:iteration items="{!v.PaginationList}" var="a" >
+                        <tr >
+                            <c:SingleAccountRecordView account="{!a}" updateAcc="{!a}"/>
+                        </tr>  <br/> 
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <!--Previous and Next buttons-->
+            <lightning:buttonGroup class="slds-m-left_medium">
+                <lightning:button label="Previous" disabled="{!v.startPage == 0}"  
+                                  onclick="{!c.previous}" variant="brand"
+                                  iconName='utility:back'/>
+                &nbsp; &nbsp; &nbsp;
+                <lightning:button label="Next" disabled="{!v.endPage >= v.totalRecords}" 
+                                  onclick="{!c.next}" variant="brand"
+                                  iconName='utility:forward' iconPosition='right'/>
+            </lightning:buttonGroup>
+        </lightning:card>
+    </div>
+</aura:component>
